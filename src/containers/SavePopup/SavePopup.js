@@ -4,7 +4,7 @@ import "./SavePopup.scss";
 
 function SavePopup(props) {
   const handleExit = () => {
-    props.history.goBack();
+    props.history.push("/");
   };
   const colorOptions = props.currentPalette.map(palette => {
     return (
