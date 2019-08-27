@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 import LandingPage from "../LandingPage/LandingPage";
-import NavBar from "../NavBar/NavBar";
+import NavBar from "../../containers/NavBar/NavBar";
 import PaletteEditor from "../PaletteEditor/PaletteEditor";
 import SavePopup from "../../containers/SavePopup/SavePopup";
 import userPopup from "../../containers/userPopup/userPopup";
