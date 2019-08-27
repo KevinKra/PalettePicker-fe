@@ -25,15 +25,33 @@ class userPopup extends Component {
     // register user
   };
 
+  handleChanges = e => {
+    const { name, value } = e.target;
+    this.setState({ [name]: value });
+  };
+
   render() {
+    const inputs = (
+      <Fragment>
+        <label htmlFor="username">Enter Username</label>
+        <input
+          type="text"
+          name="username"
+          onChange={e => this.handleChanges(e)}
+        />
+        <label htmlFor="password">Enter Password</label>
+        <input
+          type="password"
+          name="password"
+          onChange={e => this.handleChanges(e)}
+        />
+      </Fragment>
+    );
     const loginFormat = (
       <Fragment>
         <h3 className="editor-title">To continue, log in to PalettePicker.</h3>
         <form onSubmit={e => this.handleLogin(e)}>
-          <label htmlFor="">Enter Username</label>
-          <input type="text" name="username" />
-          <label htmlFor="">Enter Password</label>
-          <input type="password" name="password" />
+          {inputs}
           <button className="submit-btn">Login</button>
           <button
             className="submit-btn"
@@ -49,10 +67,7 @@ class userPopup extends Component {
       <Fragment>
         <h3 className="editor-title">Sign up with a username and password.</h3>
         <form onSubmit={e => this.handleRegister(e)}>
-          <label htmlFor="">Enter Username</label>
-          <input type="email" name="email" />
-          <label htmlFor="">Enter Password</label>
-          <input type="text" name="password" />
+          {inputs}
           <button className="submit-btn">Register</button>
           <button
             className="submit-btn"
