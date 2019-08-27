@@ -1,0 +1,33 @@
+.NavBar {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 5;
+  background-color: white;
+  border-bottom: 2px solid coral;
+  box-shadow: -1px -5px 5px 6px rgba(0, 0, 0, 0.75);
+  .NavBar > h2 {
+    margin: 0.5rem;
+    margin-left: 3.5rem;
+    font-family: "Carter One", cursive;
+    color: coral;
+  }
+
+  .navbar-form {
+    margin-right: 3.5rem;
+  }
+
+  .navbar-form > button {
+    padding: 0.4rem 2.5rem;
+    margin: 0.2rem;
+    color: white;
+    background-color: coral;
+    border: 1px solid rgb(199, 94, 56);
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+}
