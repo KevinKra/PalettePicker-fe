@@ -8,6 +8,9 @@ export const userProjects = (state = [], action) => {
     //   return action.project;
     case "REMOVE_USER_PROJECT":
       return state.filter(project => project.projectId !== action.id);
+    case "LOGOUT_USER":
+      const resetState = [];
+      return resetState;
     default:
       return state;
   }
