@@ -32,3 +32,17 @@ export const removeUserProject = id => {
     id
   };
 };
+
+export const updateCurrentUser = userDetails => {
+  return {
+    type: "UPDATE_CURRENT_USER",
+    userDetails
+  };
+};
+
+export const logoutUser = user => {
+  return {
+    type: "LOGOUT_USER",
+    user
+  };
+};
