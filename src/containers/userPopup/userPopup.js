@@ -1,4 +1,6 @@
 import React, { Component, Fragment } from "react";
+import { connect } from "react-redux";
+import * as actions from "../../_redux/actions";
 import "./userPopup.scss";
 
 class userPopup extends Component {
@@ -13,16 +15,28 @@ class userPopup extends Component {
 
   handlePageChange = destination => this.props.history.push(`/${destination}`);
 
+  // user logs in, get user data / projects from server
+  // dispatch data to store
+  // close popup window
   handleLogin = e => {
     console.log("logging in...");
     e.preventDefault();
-    // login user
+    // capture login values
+    // verify against server and retrieve
+    // return user details and projects
+    // REDUX update store => ACTION: this.props.addUserProjects(projects)
+    // REDUX update user => ACTION: this.props.updateCurrentUser(userDetails)
+    // login user / close window
   };
 
   handleRegister = e => {
     console.log("Registering...");
     e.preventDefault();
-    // register user
+    // capture register values
+    // make sure user doesnt already exist in DB
+    // Good: add user to database
+    // REDUX update user => ACTION: this.props.updateCurrentUser(userDetails)
+    // login user / close window
   };
 
   handleChanges = e => {
@@ -37,12 +51,14 @@ class userPopup extends Component {
         <input
           type="text"
           name="username"
+          value={this.state.username}
           onChange={e => this.handleChanges(e)}
         />
         <label htmlFor="password">Enter Password</label>
         <input
           type="password"
           name="password"
+          value={this.state.password}
           onChange={e => this.handleChanges(e)}
         />
       </Fragment>
@@ -50,15 +66,17 @@ class userPopup extends Component {
     const loginFormat = (
       <Fragment>
         <h3 className="editor-title">To continue, log in to PalettePicker.</h3>
-        <form onSubmit={e => this.handleLogin(e)}>
+        <form className="user-form" onSubmit={e => this.handleLogin(e)}>
           {inputs}
-          <button className="submit-btn">Login</button>
-          <button
-            className="submit-btn"
-            onClick={() => this.handlePageChange("register")}
-          >
-            new user?
-          </button>
+          <div className="form-btns">
+            <button className="form-btn">Login</button>
+            <button
+              className="form-btn"
+              onClick={() => this.handlePageChange("register")}
+            >
+              new user?
+            </button>
+          </div>
         </form>
       </Fragment>
     );
@@ -66,15 +84,17 @@ class userPopup extends Component {
     const registerFormat = (
       <Fragment>
         <h3 className="editor-title">Sign up with a username and password.</h3>
-        <form onSubmit={e => this.handleRegister(e)}>
+        <form className="user-form" onSubmit={e => this.handleRegister(e)}>
           {inputs}
-          <button className="submit-btn">Register</button>
-          <button
-            className="submit-btn"
-            onClick={() => this.handlePageChange("login")}
-          >
-            Already have an account?
-          </button>
+          <div className="form-btns">
+            <button className="form-btn">Register</button>
+            <button
+              className="form-btn"
+              onClick={() => this.handlePageChange("login")}
+            >
+              Already have an account?
+            </button>
+          </div>
         </form>
       </Fragment>
     );
@@ -85,13 +105,24 @@ class userPopup extends Component {
           <button className="popup-exit" onClick={this.handleExit}>
             X
           </button>
-          {this.props.location.pathname === "/login"
-            ? loginFormat
-            : registerFormat}
+          <section className="form-section">
+            {this.props.location.pathname === "/login"
+              ? loginFormat
+              : registerFormat}
+          </section>
         </section>
       </Fragment>
     );
   }
 }
 
-export default userPopup;
+const mapDispatchToProps = dispatch => ({
+  addUserProjects: projects => dispatch(actions.addUserProjects(projects)),
+  updateCurrentUser: userDetails =>
+    dispatch(actions.updateCurrentUser(userDetails))
+});
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(userPopup);
