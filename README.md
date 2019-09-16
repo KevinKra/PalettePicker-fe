@@ -12,10 +12,6 @@ visit [Heroku - https://kra-teo-palettepicker.herokuapp.com/](https://kra-teo-pa
 
 ![Imgur](https://i.imgur.com/uAIEXCQ.png)
 
-#### Projects Dashboard
-
-![Dashboard](https://i.imgur.com/tsf17Sc.png)
-
 ## Technology Used
 
 - React
