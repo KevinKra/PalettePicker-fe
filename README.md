@@ -10,7 +10,7 @@ visit [Heroku - https://kra-teo-palettepicker.herokuapp.com/](https://kra-teo-pa
 
 #### PalettePicker tool
 
-![Imgur](https://i.imgur.com/uAIEXCQ.png)
+![PalettePicker](https://imgur.com/mXsnfVy)
 
 ## Technology Used
 
