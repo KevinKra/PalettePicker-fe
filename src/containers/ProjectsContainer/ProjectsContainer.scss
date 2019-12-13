@@ -1,14 +1,13 @@
-.ProjectsContainer {
-  min-height: 500px;
-  transition: 1s min-height ease-in-out;
-  .projects-container-header {
-    display: flex;
-    justify-content: center;
-    height: 100%;
-    color: #ffffff;
-  }
-}
+@import "../../styles/main.scss";
 
-.collapse {
-  min-height: 200px;
+.ProjectsContainer {
+	grid-row: 2 / 3;
+	transition: 1s min-height ease-in-out;
+	.projects-header {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		height: 100%;
+		color: $color-primary;
+	}
 }
