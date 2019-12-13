@@ -5,6 +5,7 @@ import EditBarFull from '../../components/EditBarFull/EditBarFull';
 import EditBarPartial from '../../components/EditBarPartial/EditBarPartial';
 import { withRouter } from 'react-router-dom';
 import * as actions from '../../_redux/actions';
+import * as helpers from '../../helpers';
 import { connect } from 'react-redux';
 import './PalettePicker.scss';
 
@@ -30,29 +31,25 @@ class PalettePicker extends Component {
 		this.props.history.push('palette/save');
 	};
 
-  // reworked
+	// reworked
 	toggleLock = () => {
 		this.state.hueLocked ? this.setState({ hueLocked: false }) : this.setState({ hueLocked: true });
 	};
 
 	toggleEditBarFull = () => {
-    const { editable } = this.state
+		const { editable } = this.state;
 		this.setState({ editable: !editable });
 	};
 
-  updatePaletteFeature = (e, feature) => {
-    const { value } = e.target;
-    this.setState({ [feature]: value })
-  }
-  
-  // vanilla
+	updatePaletteFeature = (e, feature) => {
+		const { value } = e.target;
+		this.setState({ [feature]: value });
+	};
+
+	// vanilla
 	updateColors = (e, previousColors) => {
 		e.preventDefault();
 		this.generateColors(previousColors);
-	};
-
-	generateRandomHue = () => {
-		return Math.floor(Math.random() * (360 + 1));
 	};
 
 	handleLockStatus = (targetColor, lockStatus) => {
@@ -69,7 +66,7 @@ class PalettePicker extends Component {
 		const { hue, hueLocked, colorScheme, variation, colors } = this.state;
 		const { propColorScheme = 'triade' } = this.props;
 
-		const hueToUse = !hueLocked ? this.generateRandomHue() : hue;
+		const hueToUse = !hueLocked ? helpers.generateRandomHue() : hue;
 
 		// const hueToUse = generatedHue || hue;
 		const colorSchemeToUse = colorScheme || propColorScheme;
@@ -124,9 +121,9 @@ class PalettePicker extends Component {
 					hue={this.state.hue}
 					hueLocked={this.state.hueLocked}
 					colors={this.state.colors}
-          updatePaletteFeature={this.updatePaletteFeature}
+					updatePaletteFeature={this.updatePaletteFeature}
 					updateHue={this.updateHue}
-          toggleLock={this.toggleLock}
+					toggleLock={this.toggleLock}
 					updateVariation={this.updateVariation}
 					updateColorScheme={this.updateColorScheme}
 				/>
