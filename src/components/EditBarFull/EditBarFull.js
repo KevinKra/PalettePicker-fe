@@ -1,5 +1,5 @@
 import React from 'react';
-import './EditBarFull.css';
+import './EditBarFull.scss';
 
 export default function EditBarFull(props) {
 	const editBarActive = {

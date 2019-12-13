@@ -1,5 +1,5 @@
 import React from 'react';
-import './EditBarPartial.css';
+import './EditBarPartial.scss';
 
 export default function EditBarPartial(props) {
 	return (

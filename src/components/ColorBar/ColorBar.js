@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './ColorBar.css';
+import './ColorBar.scss';
 
 export default class ColorBar extends Component {
 	render() {
