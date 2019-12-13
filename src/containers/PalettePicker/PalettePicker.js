@@ -46,19 +46,17 @@ class PalettePicker extends Component {
 		this.setState({ [feature]: value });
 	};
 
+	togglePaletteLock = (targetColor, lockStatus) => {
+		const { colors } = this.state;
+		const index = colors.findIndex((color) => targetColor === color);
+		colors.slice()[index].locked = lockStatus;
+		this.setState({ colors });
+	};
+
 	// vanilla
 	updateColors = (e, previousColors) => {
 		e.preventDefault();
 		this.generateColors(previousColors);
-	};
-
-	handleLockStatus = (targetColor, lockStatus) => {
-		const colorIndex = this.state.colors.findIndex((color) => {
-			return targetColor === color;
-		});
-		const colors = this.state.colors.slice();
-		colors[colorIndex].locked = lockStatus;
-		this.setState({ colors });
 	};
 
 	generateColors = async (previousColors = []) => {
@@ -98,7 +96,7 @@ class PalettePicker extends Component {
 					color={color}
 					vRotate={this.props.vRotate}
 					number={i}
-					handleLockStatus={this.handleLockStatus}
+					togglePaletteLock={this.togglePaletteLock}
 					key={i}
 				/>
 			);
