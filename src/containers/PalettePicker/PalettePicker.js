@@ -35,28 +35,17 @@ class PalettePicker extends Component {
 		this.state.hueLocked ? this.setState({ hueLocked: false }) : this.setState({ hueLocked: true });
 	};
 
+	toggleEditBarFull = () => {
+    const { editable } = this.state
+		this.setState({ editable: !editable });
+	};
+
+  updatePaletteFeature = (e, feature) => {
+    const { value } = e.target;
+    this.setState({ [feature]: value })
+  }
+  
   // vanilla
-	toggleEditable = () => {
-		const toggle = this.state.editable;
-		this.setState({ editable: !toggle });
-	};
-
-	updateHue = (e) => {
-		const { value } = e.target;
-		this.setState({ hue: value });
-	};
-
-
-	updateColorScheme = (e) => {
-		const { value } = e.target;
-		this.setState({ colorScheme: value });
-	};
-
-	updateVariation = (e) => {
-		const { value } = e.target;
-		this.setState({ variation: value });
-	};
-
 	updateColors = (e, previousColors) => {
 		e.preventDefault();
 		this.generateColors(previousColors);
@@ -135,7 +124,7 @@ class PalettePicker extends Component {
 					hue={this.state.hue}
 					hueLocked={this.state.hueLocked}
 					colors={this.state.colors}
-					updateColors={this.updateColors}
+          updatePaletteFeature={this.updatePaletteFeature}
 					updateHue={this.updateHue}
           toggleLock={this.toggleLock}
 					updateVariation={this.updateVariation}
@@ -143,7 +132,7 @@ class PalettePicker extends Component {
 				/>
 				<div className="colors-section">{colors}</div>
 				<div className="button-bar">
-					<button className="primary-btn" onClick={this.toggleEditable}>
+					<button className="primary-btn" onClick={this.toggleEditBarFull}>
 						Edit
 					</button>
 					<button className="primary-btn" onClick={this.saveDialogOpen}>

@@ -24,7 +24,7 @@ export default function EditBarFull(props) {
                 autoComplete="off"
                 name="hue-selection"
                 value={props.hue}
-                onChange={props.updateHue}
+                onChange={(e) => props.updatePaletteFeature(e, 'hue')}
               />
             </label>
             {props.hueLocked ? (
@@ -42,7 +42,7 @@ export default function EditBarFull(props) {
               type="radio"
               name="colorScheme-selection"
               value="mono"
-              onClick={e => props.updateColorScheme(e)}
+              onClick={e => props.updatePaletteFeature(e, 'colorScheme')}
             />
           </label>
           <label htmlFor="contrast">
@@ -51,7 +51,7 @@ export default function EditBarFull(props) {
               type="radio"
               name="colorScheme-selection"
               value="contrast"
-              onClick={e => props.updateColorScheme(e)}
+              onClick={e => props.updatePaletteFeature(e, 'colorScheme')}
             />
           </label>
           <label htmlFor="triade">
@@ -61,7 +61,7 @@ export default function EditBarFull(props) {
               name="colorScheme-selection"
               value="triade"
               defaultChecked
-              onClick={e => props.updateColorScheme(e)}
+              onClick={e => props.updatePaletteFeature(e, 'colorScheme')}
             />
           </label>
           <label htmlFor="tetrade">
@@ -70,7 +70,7 @@ export default function EditBarFull(props) {
               type="radio"
               name="colorScheme-selection"
               value="tetrade"
-              onClick={e => props.updateColorScheme(e)}
+              onClick={e => props.updatePaletteFeature(e, 'colorScheme')}
             />
           </label>
           <label htmlFor="analogic">
@@ -79,7 +79,7 @@ export default function EditBarFull(props) {
               type="radio"
               name="colorScheme-selection"
               value="analogic"
-              onClick={e => props.updateColorScheme(e)}
+              onClick={e => props.updatePaletteFeature(e, 'colorScheme')}
             />
           </label>
         </section>
@@ -91,7 +91,7 @@ export default function EditBarFull(props) {
               type="radio"
               name="variation-selection"
               value="default"
-              onClick={e => props.updateVariation(e)}
+              onClick={e => props.updatePaletteFeature(e, 'variation')}
             />
           </label>
           <label htmlFor="pastel">
@@ -101,7 +101,7 @@ export default function EditBarFull(props) {
               name="variation-selection"
               value="pastel"
               defaultChecked
-              onClick={e => props.updateVariation(e)}
+              onClick={e => props.updatePaletteFeature(e, 'variation')}
             />
           </label>
           <label htmlFor="soft">
@@ -110,7 +110,7 @@ export default function EditBarFull(props) {
               type="radio"
               name="variation-selection"
               value="soft"
-              onClick={e => props.updateVariation(e)}
+              onClick={e => props.updatePaletteFeature(e, 'variation')}
             />
           </label>
           <label htmlFor="light">
@@ -119,7 +119,7 @@ export default function EditBarFull(props) {
               type="radio"
               name="variation-selection"
               value="light"
-              onClick={e => props.updateVariation(e)}
+              onClick={e => props.updatePaletteFeature(e, 'variation')}
             />
           </label>
           <label htmlFor="hard">
@@ -128,7 +128,7 @@ export default function EditBarFull(props) {
               type="radio"
               name="variation-selection"
               value="hard"
-              onClick={e => props.updateVariation(e)}
+              onClick={e => props.updatePaletteFeature(e, 'variation')}
             />
           </label>
           <label htmlFor="pale">
@@ -137,7 +137,7 @@ export default function EditBarFull(props) {
               type="radio"
               name="variation-selection"
               value="pale"
-              onClick={e => props.updateVariation(e)}
+              onClick={e => props.updatePaletteFeature(e, 'variation')}
             />
           </label>
         </section>
