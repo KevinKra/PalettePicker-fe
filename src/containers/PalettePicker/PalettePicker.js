@@ -80,26 +80,34 @@ class PalettePicker extends Component {
   generateColors = async (previousColors = []) => {
     // The possible values are 'mono', 'contrast', 'triade', 'tetrade', and 'analogic'
     const { hue, hueLocked, colorScheme, variation, colors } = this.state;
-    const { pColorScheme = "triade" } = this.props;
-    let generatedHue;
-    if (!hueLocked) {
-      generatedHue = this.generateRandomHue();
-    }
+    const { propColorScheme = "triade" } = this.props;
+
+    const hueToUse = !hueLocked ? this.generateRandomHue() :  hue;
+  
+    // const hueToUse = generatedHue || hue;
+    const colorSchemeToUse = colorScheme || propColorScheme; 
+
+    // instantiate the ColorScheme package with our define state and props
     const scheme = new ColorScheme();
     scheme
-      .from_hue(generatedHue || hue)
-      .scheme(colorScheme || pColorScheme)
+      .from_hue(hueToUse)
+      .scheme(colorSchemeToUse)
       .variation(variation);
+    // generate array of objects to be used for palette board
     const generatedColors = scheme.colors().map(color => {
       return { hex: "#" + color, locked: false };
     });
+    // handling new palette generation
     if (previousColors.length !== generatedColors.length) {
-      this.setState({ colors: generatedColors, hue: generatedHue || hue });
+      // if the previous/current palettes are a different size, generate an entirely new palette
+      this.setState({ colors: generatedColors, hue: hueToUse });
     } else {
+      // if the previous/current palettes are the same size, update the current palette 
       colors.forEach((color, i) => {
+        // but do not changed locked values
         if (color.locked === true) generatedColors.splice(i, 1, color);
       });
-      this.setState({ colors: generatedColors, hue: generatedHue || hue });
+      this.setState({ colors: generatedColors, hue: hueToUse });
     }
   };
 
