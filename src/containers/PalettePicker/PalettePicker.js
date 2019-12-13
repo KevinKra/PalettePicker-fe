@@ -59,38 +59,37 @@ class PalettePicker extends Component {
 		this.generateColors(previousColors);
 	};
 
-	generateColors = async (previousColors = []) => {
-		// The possible values are 'mono', 'contrast', 'triade', 'tetrade', and 'analogic'
-		const { hue, hueLocked, colorScheme, variation, colors } = this.state;
-		const { propColorScheme = 'triade' } = this.props;
-
-		const hueToUse = !hueLocked ? helpers.generateRandomHue() : hue;
-
-		// const hueToUse = generatedHue || hue;
-		const colorSchemeToUse = colorScheme || propColorScheme;
-
-		// instantiate the ColorScheme package with our define state and props
-		const scheme = new ColorScheme();
-		scheme.from_hue(hueToUse).scheme(colorSchemeToUse).variation(variation);
-		// generate array of objects to be used for palette board
-		const generatedColors = scheme.colors().map((color) => {
-			return { hex: '#' + color, locked: false };
-		});
-		// handling new palette generation
-		if (previousColors.length !== generatedColors.length) {
-			// if the previous/current palettes are a different size, generate an entirely new palette
-			this.setState({ colors: generatedColors, hue: hueToUse });
+	paletteGenerator = (previousColors, newColors, hue) => {
+		if (previousColors.length !== newColors.length) {
+			this.setState({ colors: newColors, hue });
 		} else {
-			// if the previous/current palettes are the same size, update the current palette
-			colors.forEach((color, i) => {
-				if (color.locked === true) generatedColors.splice(i, 1, color);
+			previousColors.forEach((color, i) => {
+				if (color.locked === true) newColors.splice(i, 1, color);
 			});
-			this.setState({ colors: generatedColors, hue: hueToUse });
+			this.setState({ colors: newColors, hue });
 		}
 	};
 
+	generateColors = async (previousColors = []) => {
+		const { hue, hueLocked, colorScheme, variation } = this.state;
+		const { propColorScheme = 'triade' } = this.props;
+
+		const hueToUse = !hueLocked ? helpers.generateRandomHue() : hue;
+		const colorSchemeToUse = colorScheme || propColorScheme;
+
+		const scheme = new ColorScheme();
+		scheme.from_hue(hueToUse).scheme(colorSchemeToUse).variation(variation);
+
+		const newColors = scheme.colors().map((color) => {
+			return { hex: '#' + color, locked: false };
+		});
+
+		this.paletteGenerator(previousColors, newColors, hueToUse);
+	};
+
 	render() {
-		const colors = this.state.colors.map((color, i) => {
+		const { editable, hue, hueLocked, colorScheme, variation, colors } = this.state;
+		const palettes = this.state.colors.map((color, i) => {
 			return (
 				<ColorBar
 					color={color}
@@ -105,27 +104,26 @@ class PalettePicker extends Component {
 		return (
 			<section className="PalettePicker">
 				<EditBarPartial
-					editable={this.state.editable}
-					hue={this.state.hue}
-					hueLocked={this.state.hueLocked}
-					colorScheme={this.state.colorScheme}
-					variation={this.state.variation}
-					colors={this.state.colors}
+					editable={editable}
+					hue={hue}
+					hueLocked={hueLocked}
+					colorScheme={colorScheme}
+					variation={variation}
+					colors={colors}
 					updateColors={this.updateColors}
 					toggleLock={this.toggleLock}
 				/>
 				<EditBarFull
-					editable={this.state.editable}
-					hue={this.state.hue}
-					hueLocked={this.state.hueLocked}
-					colors={this.state.colors}
+					editable={editable}
+					hue={hue}
+					hueLocked={hueLocked}
+					colors={colors}
 					updatePaletteFeature={this.updatePaletteFeature}
-					updateHue={this.updateHue}
 					toggleLock={this.toggleLock}
 					updateVariation={this.updateVariation}
 					updateColorScheme={this.updateColorScheme}
 				/>
-				<div className="colors-section">{colors}</div>
+				<div className="colors-section">{palettes}</div>
 				<div className="button-bar">
 					<button className="primary-btn" onClick={this.toggleEditBarFull}>
 						Edit
