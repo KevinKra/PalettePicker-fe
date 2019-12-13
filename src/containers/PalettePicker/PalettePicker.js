@@ -31,7 +31,6 @@ class PalettePicker extends Component {
 		this.props.history.push('palette/save');
 	};
 
-	// reworked
 	toggleLock = () => {
 		this.state.hueLocked ? this.setState({ hueLocked: false }) : this.setState({ hueLocked: true });
 	};
@@ -41,11 +40,6 @@ class PalettePicker extends Component {
 		this.setState({ editable: !editable });
 	};
 
-	updatePaletteFeature = (e, feature) => {
-		const { value } = e.target;
-		this.setState({ [feature]: value });
-	};
-
 	togglePaletteLock = (targetColor, lockStatus) => {
 		const { colors } = this.state;
 		const index = colors.findIndex((color) => targetColor === color);
@@ -53,7 +47,11 @@ class PalettePicker extends Component {
 		this.setState({ colors });
 	};
 
-	// vanilla
+	updatePaletteFeature = (e, feature) => {
+		const { value } = e.target;
+		this.setState({ [feature]: value });
+	};
+
 	updateColors = (e, previousColors) => {
 		e.preventDefault();
 		this.generateColors(previousColors);
@@ -119,9 +117,9 @@ class PalettePicker extends Component {
 					hueLocked={hueLocked}
 					colors={colors}
 					updatePaletteFeature={this.updatePaletteFeature}
+					updateColors={this.updateColors}
 					toggleLock={this.toggleLock}
 					updateVariation={this.updateVariation}
-					updateColorScheme={this.updateColorScheme}
 				/>
 				<div className="colors-section">{palettes}</div>
 				<div className="button-bar">
