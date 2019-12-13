@@ -27,9 +27,15 @@ class PalettePicker extends Component {
 	}
 
 	saveDialogOpen = () => {
-		this.props.history.push('save-palette');
+		this.props.history.push('palette/save');
 	};
 
+  // reworked
+	toggleLock = () => {
+		this.state.hueLocked ? this.setState({ hueLocked: false }) : this.setState({ hueLocked: true });
+	};
+
+  // vanilla
 	toggleEditable = () => {
 		const toggle = this.state.editable;
 		this.setState({ editable: !toggle });
@@ -40,17 +46,9 @@ class PalettePicker extends Component {
 		this.setState({ hue: value });
 	};
 
-	hueLock = () => {
-		this.setState({ hueLocked: true });
-	};
-
-	hueUnlock = () => {
-		this.setState({ hueLocked: false });
-	};
 
 	updateColorScheme = (e) => {
 		const { value } = e.target;
-		console.log(value);
 		this.setState({ colorScheme: value });
 	};
 
@@ -130,8 +128,7 @@ class PalettePicker extends Component {
 					variation={this.state.variation}
 					colors={this.state.colors}
 					updateColors={this.updateColors}
-					hueLock={this.hueLock}
-					hueUnlock={this.hueUnlock}
+					toggleLock={this.toggleLock}
 				/>
 				<EditBarFull
 					editable={this.state.editable}
@@ -140,8 +137,7 @@ class PalettePicker extends Component {
 					colors={this.state.colors}
 					updateColors={this.updateColors}
 					updateHue={this.updateHue}
-					hueLock={this.hueLock}
-					hueUnlock={this.hueUnlock}
+          toggleLock={this.toggleLock}
 					updateVariation={this.updateVariation}
 					updateColorScheme={this.updateColorScheme}
 				/>

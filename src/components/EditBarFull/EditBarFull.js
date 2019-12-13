@@ -28,9 +28,9 @@ export default function EditBarFull(props) {
               />
             </label>
             {props.hueLocked ? (
-              <button onClick={props.hueUnlock}>Unlock</button>
+              <button onClick={props.toggleLock}>Unlock</button>
             ) : (
-              <button onClick={props.hueLock}>Lock</button>
+              <button onClick={props.toggleLock}>Lock</button>
             )}
           </div>
         </div>
