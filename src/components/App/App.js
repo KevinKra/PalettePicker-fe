@@ -11,7 +11,7 @@ function App() {
 		<section className="App">
 			<Route path="/" component={NavBar} />
 			<Route exact path="/edit-palette" component={PaletteEditor} />
-			<Route exact path="/save-palette" component={SavePopup} />
+			<Route exact path="/palette/save" component={SavePopup} />
 			<Route path="/" component={LandingPage} />
 		</section>
 	);
