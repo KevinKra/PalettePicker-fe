@@ -1,84 +1,72 @@
+@import "../../styles/main.scss";
+
 .edit-block {
-  position: absolute;
-  z-index: 2;
-  width: 100%;
-  background-color: white;
-  transform: translateY(-110%);
-  transition: 0.3s ease-in-out;
-  border-bottom: 6px solid coral;
-  box-shadow: -1px -7px 15px 9px rgba(0, 0, 0, 0.75);
-}
+	position: absolute;
+	z-index: 2;
+	width: 100%;
+	background-color: white;
+	transform: translateY(-110%);
+	transition: 0.3s ease-in-out;
+	border-bottom: 6px solid coral;
+	box-shadow: -1px -7px 15px 9px rgba(0, 0, 0, 0.75);
+	.edits-form {
+		display: flex;
+		justify-content: space-evenly;
+		margin: 0.5rem;
+	}
 
-.edits-form {
-  display: flex;
-  justify-content: space-evenly;
-  margin: 0.5rem;
-}
+	.hue-selection-inputs {
+		display: flex;
+		flex-direction: column;
+	}
 
-.hue-selection-inputs {
-  display: flex;
-  flex-direction: column;
-}
+	.hue-selection-inputs > button {
+		@include btn-style-1;
+		height: 30px;
+		margin: 0.2rem 0;
+	}
 
-.hue-selection-inputs > button {
-  height: 30px;
-  margin: 0.2rem 0;
-  background-color: coral;
-  color: white;
-  border: 1px solid red;
-  border-radius: 3px;
-}
+	.radio-styles {
+		display: flex;
+		flex-direction: column;
+		width: 33%;
+		border-left: 1px solid black;
+		padding: 0 0.5rem;
+	}
 
-.radio-styles {
-  display: flex;
-  flex-direction: column;
-  width: 33%;
-  border-left: 1px solid black;
-  padding: 0 0.5rem;
-}
+	.radio-styles > label {
+		display: flex;
+		justify-content: space-between;
+	}
 
-.radio-styles > label {
-  display: flex;
-  justify-content: space-between;
-}
+	.update-btn {
+		@include btn-style-1;
+		padding: 0 1rem;
+	}
 
-.update-btn {
-  background-color: coral;
-  color: white;
-  border: 1px solid rgb(199, 94, 56);
-  border-radius: 4px;
-  padding: 0 1rem;
-  cursor: pointer;
-  transition: 0.07s all ease-in-out;
-  box-shadow: inset 0px 0px 0px 0px rgba(0, 0, 0, 0.75);
-}
+	.exit-container {
+		display: flex;
+		justify-content: center;
+		border-top: 1px solid $color-accent;
+	}
 
-.update-btn:focus {
-  outline: none;
-}
+	.exit-btn {
+		@include btn-style-1;
+		width: 7rem;
+		height: 1.4rem;
+		margin: .2rem;
+	}
 
-.update-btn:active {
-  outline: none;
-  box-shadow: inset -2px 2px 1px 2px rgba(0, 0, 0, 0.75);
-}
-
-.update-btn > p {
-  transition: 0.07s all ease-in-out;
-  transform: translate(0%, 0%);
-}
-.update-btn:active > p {
-  transform: translate(-6%, 6%);
-}
-
-h4 {
-  margin: 0;
-  margin-bottom: 0.2rem;
-  font-size: 16px;
-  font-family: "Lobster", cursive;
-  letter-spacing: 1px;
-  font-weight: 100;
-  color: #222;
-}
-label {
-  font-size: 12px;
+	h4 {
+		margin: 0;
+		margin-bottom: 0.2rem;
+		font-size: 16px;
+		font-family: "Lobster", cursive;
+		letter-spacing: 1px;
+		font-weight: 100;
+		color: #222;
+	}
+	label {
+		font-size: 12px;
+	}
 }

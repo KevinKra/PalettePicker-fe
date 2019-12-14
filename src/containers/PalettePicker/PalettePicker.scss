@@ -27,17 +27,9 @@
 }
 
 .primary-btn {
-	border: 1px solid transparent;
-	background-color: $color-accent;
+	@include btn-style-1;
+	font-size: 14px;
 	height: 50%;
 	width: 45%;
 	margin: 0.5rem;
-	color: $color-primary;
-	font-size: 1rem;
-	border-radius: 5px;
-}
-
-button:focus {
-	outline: none;
-	cursor: pointer;
 }
