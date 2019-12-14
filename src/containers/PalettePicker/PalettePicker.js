@@ -114,12 +114,13 @@ class PalettePicker extends Component {
 				<EditBarFull
 					editable={editable}
 					hue={hue}
-					hueLocked={hueLocked}
 					colors={colors}
-					updatePaletteFeature={this.updatePaletteFeature}
 					updateColors={this.updateColors}
-					toggleLock={this.toggleLock}
 					updateVariation={this.updateVariation}
+					hueLocked={hueLocked}
+					toggleLock={this.toggleLock}
+					toggleEditBarFull={this.toggleEditBarFull}
+					updatePaletteFeature={this.updatePaletteFeature}
 				/>
 				<div className="colors-section">{palettes}</div>
 				<div className="button-bar">

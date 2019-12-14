@@ -139,6 +139,11 @@ export default function EditBarFull(props) {
 					<p>Update</p>
 				</button>
 			</form>
+			<section className="exit-container">
+				<button className="exit-btn" onClick={props.toggleEditBarFull}>
+					Close
+				</button>
+			</section>
 		</section>
 	);
 }
