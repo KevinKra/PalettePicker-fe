@@ -6,25 +6,32 @@ export default function EditBarFull(props) {
 		transform: 'translateY(-9%)'
 	};
 
-	const generateSchemes = () => {
+	const generateRadios = (type) => {
 		const schemeNames = [ 'mono', 'contrast', 'triade', 'tetrade', 'analogic' ];
-		return schemeNames.map((name) => {
+		const variationNames = [ 'default', 'pastel', 'soft', 'light', 'hard', 'pale' ];
+		const radioName = type == 'colorsScheme' ? 'colorScheme-selection' : 'variation-selection';
+		const radioMethod =
+			type == 'colorScheme'
+				? (e) => props.updatePaletteFeature(e, 'colorScheme')
+				: (e) => props.updatePaletteFeature(e, 'variation');
+		return (type == 'colorScheme' ? schemeNames : variationNames).map((name) => {
 			return (
 				<label htmlFor={name}>
 					{name}
 					<input
 						type="radio"
-						name="colorScheme-selection"
+						name={radioName}
 						value={name}
 						defaultChecked={props.colorScheme === name ? true : false}
-						onClick={(e) => props.updatePaletteFeature(e, 'colorScheme')}
+						onClick={radioMethod}
 					/>
 				</label>
 			);
 		});
 	};
 
-	const colorSchemes = generateSchemes();
+	const colorSchemes = generateRadios('colorScheme');
+	const colorVariations = generateRadios('variations');
 
 	return (
 		<section className="edit-block" style={props.showFullEditBar ? editBarActive : null}>
@@ -52,110 +59,10 @@ export default function EditBarFull(props) {
 				<section className="radio-styles">
 					<h4>Color schemes:</h4>
 					{colorSchemes}
-					{/* <label htmlFor="mono">
-						mono
-						<input
-							type="radio"
-							name="colorScheme-selection"
-							value="mono"
-							defaultChecked
-							onClick={(e) => props.updatePaletteFeature(e, 'colorScheme')}
-						/>
-					</label>
-					<label htmlFor="contrast">
-						contrast
-						<input
-							type="radio"
-							name="colorScheme-selection"
-							value="contrast"
-							onClick={(e) => props.updatePaletteFeature(e, 'colorScheme')}
-						/>
-					</label>
-					<label htmlFor="triade">
-						triade
-						<input
-							type="radio"
-							name="colorScheme-selection"
-							value="triade"
-							onClick={(e) => props.updatePaletteFeature(e, 'colorScheme')}
-						/>
-					</label>
-					<label htmlFor="tetrade">
-						tetrade
-						<input
-							type="radio"
-							name="colorScheme-selection"
-							value="tetrade"
-							onClick={(e) => props.updatePaletteFeature(e, 'colorScheme')}
-						/>
-					</label>
-					<label htmlFor="analogic">
-						analogic
-						<input
-							type="radio"
-							name="colorScheme-selection"
-							value="analogic"
-							onClick={(e) => props.updatePaletteFeature(e, 'colorScheme')}
-						/>
-					</label> */}
 				</section>
 				<section className="radio-styles">
 					<h4>Color Variations:</h4>
-					<label htmlFor="default">
-						default
-						<input
-							type="radio"
-							name="variation-selection"
-							value="default"
-							onClick={(e) => props.updatePaletteFeature(e, 'variation')}
-						/>
-					</label>
-					<label htmlFor="pastel">
-						pastel
-						<input
-							type="radio"
-							name="variation-selection"
-							value="pastel"
-							defaultChecked
-							onClick={(e) => props.updatePaletteFeature(e, 'variation')}
-						/>
-					</label>
-					<label htmlFor="soft">
-						soft
-						<input
-							type="radio"
-							name="variation-selection"
-							value="soft"
-							onClick={(e) => props.updatePaletteFeature(e, 'variation')}
-						/>
-					</label>
-					<label htmlFor="light">
-						light
-						<input
-							type="radio"
-							name="variation-selection"
-							value="light"
-							onClick={(e) => props.updatePaletteFeature(e, 'variation')}
-						/>
-					</label>
-					<label htmlFor="hard">
-						hard
-						<input
-							type="radio"
-							name="variation-selection"
-							value="hard"
-							onClick={(e) => props.updatePaletteFeature(e, 'variation')}
-						/>
-					</label>
-					<label htmlFor="pale">
-						pale
-						<input
-							type="radio"
-							name="variation-selection"
-							value="pale"
-							onClick={(e) => props.updatePaletteFeature(e, 'variation')}
-						/>
-					</label>
+					{colorVariations}
 				</section>
 				<button className="update-btn">
 					<p>Update</p>
