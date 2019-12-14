@@ -1,0 +1,52 @@
+@import "../../_styles/main.scss";
+
+.Palette {
+	position: relative;
+	border: 2px solid coral;
+	border-bottom: 5px solid coral;
+	margin: 1.5rem;
+	margin-top: 4.5rem;
+	height: 100px;
+	width: 500px;
+	max-width: 25%;
+	min-width: 200px;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.Palette > .color {
+	border: 2px solid coral;
+	border-top: 3px solid coral;
+	border-radius: 5px;
+	flex: 1;
+	margin: 2%;
+	min-width: 5%;
+}
+
+.palette-title {
+	position: absolute;
+	top: -24px;
+	left: -8px;
+	transform: rotate(-2deg);
+	color: rgb(40, 48, 56);
+	text-decoration: underline;
+}
+
+.palette-delete {
+	cursor: pointer;
+	border-radius: 50px;
+	position: absolute;
+	z-index: 2;
+	font-size: 14px;
+	background-color: rgb(40, 48, 56);
+	border: 1px solid coral;
+	color: white;
+	height: 1.6rem;
+	width: 1.6rem;
+	top: -14px;
+	right: -16px;
+}
+
+.color {
+	cursor: pointer;
+}
