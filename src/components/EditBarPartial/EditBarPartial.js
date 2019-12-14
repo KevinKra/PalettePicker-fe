@@ -3,7 +3,7 @@ import './EditBarPartial.scss';
 
 export default function EditBarPartial(props) {
 	return (
-		<section className={`${!props.editable ? 'PhraseBlock pb-active' : 'PhraseBlock pb-inactive'}`}>
+		<section className={`${!props.editable ? 'EditBarPartial pb-active' : 'EditBarPartial pb-inactive'}`}>
 			<header className="phrase-background">
 				<h2>Choose a color!</h2>
 			</header>
