@@ -6,31 +6,44 @@ export default function EditBarFull(props) {
 		transform: 'translateY(-9%)'
 	};
 
-	const generateRadios = (type) => {
+	const generateRadios = (format) => {
 		const schemeNames = [ 'mono', 'contrast', 'triade', 'tetrade', 'analogic' ];
 		const variationNames = [ 'default', 'pastel', 'soft', 'light', 'hard', 'pale' ];
-		const radioName = type == 'colorsScheme' ? 'colorScheme-selection' : 'variation-selection';
-		const radioMethod =
-			type == 'colorScheme'
-				? (e) => props.updatePaletteFeature(e, 'colorScheme')
-				: (e) => props.updatePaletteFeature(e, 'variation');
-		return (type == 'colorScheme' ? schemeNames : variationNames).map((name) => {
-			return (
-				<label htmlFor={name}>
-					{name}
-					<input
-						type="radio"
-						name={radioName}
-						value={name}
-						defaultChecked={props.colorScheme === name ? true : false}
-						onClick={radioMethod}
-					/>
-				</label>
-			);
-		});
+		// Dropped fully-DRY version because it was difficult to read. I like this version _a lot_ more.
+		if (format === 'colors') {
+			return schemeNames.map((name, i) => {
+				return (
+					<label htmlFor={name} key={i}>
+						{name}
+						<input
+							type="radio"
+							name="colorScheme-selection"
+							value={name}
+							defaultChecked={props.colorScheme === name ? true : false}
+							onClick={(e) => props.updatePaletteFeature(e, 'colorScheme')}
+						/>
+					</label>
+				);
+			});
+		} else {
+			return variationNames.map((name, i) => {
+				return (
+					<label htmlFor={name} key={i}>
+						{name}
+						<input
+							type="radio"
+							name="variation-selection"
+							value={name}
+							defaultChecked={props.variation === name ? true : false}
+							onClick={(e) => props.updatePaletteFeature(e, 'variation')}
+						/>
+					</label>
+				);
+			});
+		}
 	};
 
-	const colorSchemes = generateRadios('colorScheme');
+	const colorSchemes = generateRadios('colors');
 	const colorVariations = generateRadios('variations');
 
 	return (
