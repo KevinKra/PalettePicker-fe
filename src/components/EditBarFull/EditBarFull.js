@@ -1,5 +1,5 @@
 import React from 'react';
-import './EditBarFull.css';
+import './EditBarFull.scss';
 
 export default function EditBarFull(props) {
 	const editBarActive = {
@@ -81,6 +81,7 @@ export default function EditBarFull(props) {
 					<p>Update</p>
 				</button>
 			</form>
+			<button className="close-btn">Close</button>
 		</section>
 	);
 }

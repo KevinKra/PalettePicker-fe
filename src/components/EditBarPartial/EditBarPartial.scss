@@ -1,0 +1,96 @@
+@import "../../_styles/main.scss";
+
+.PhraseBlock {
+	position: absolute;
+	z-index: 2;
+	text-align: center;
+	width: 100%;
+	transition: 0.35s cubic-bezier(0.79, 0.16, 0.28, 1.24);
+	font-family: "Lobster", cursive;
+	letter-spacing: 1px;
+}
+
+.phrase-background {
+	margin: auto;
+	width: 30%;
+	min-width: 200px;
+	transform: skew(35deg);
+	background-color: coral;
+	box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.75);
+}
+
+.phrase-background > * {
+	transform: skew(-35deg);
+}
+
+.phrase-background > h2 {
+	margin: 0;
+	color: white;
+	padding: 0.3rem;
+}
+
+.phrase-block-content {
+	width: 25%;
+	margin: 0.2rem auto;
+	min-width: 160px;
+}
+
+.phrase-button {
+	border: 1px solid white;
+	cursor: pointer;
+	border-radius: 4px;
+	width: 100%;
+	background-color: coral;
+	color: white;
+	font-size: 14px;
+}
+
+.current-format {
+	display: flex;
+	font-family: "Comfortaa", cursive;
+	width: 90%;
+	margin: 0 auto;
+	justify-content: space-around;
+	padding: 0.2rem;
+	background-color: rgb(40, 48, 56);
+}
+
+.current-format > * {
+	color: white;
+	margin: 0;
+	font-size: 12px;
+	min-width: 33%;
+}
+
+.format-hue {
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+}
+
+.format-hue > p {
+	margin: 1px 0 0 0;
+	min-width: 25px;
+	margin-left: 15%;
+}
+
+.format-hue > i {
+	margin-right: 15%;
+}
+
+.format-hue > i:hover {
+	cursor: pointer;
+}
+
+.pb-active {
+	transform: translateY(0%);
+}
+
+.pb-inactive {
+	transform: translateY(-100%);
+}
+
+.locked-btn {
+	cursor: auto !important;
+	background-color: lightgray;
+}

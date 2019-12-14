@@ -1,11 +1,11 @@
 import React from 'react';
-import './EditBarPartial.css';
+import './EditBarPartial.scss';
 
 export default function EditBarPartial(props) {
 	return (
 		<section className={`${!props.showFullEditBar ? 'PhraseBlock pb-active' : 'PhraseBlock pb-inactive'}`}>
 			<header className="phrase-background">
-				<h2>Choose a color!</h2>
+				<h2>Build Your Palette!</h2>
 			</header>
 			<section className="phrase-block-content">
 				<button
