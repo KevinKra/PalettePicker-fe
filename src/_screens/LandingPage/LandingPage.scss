@@ -1,6 +1,8 @@
 @import "../../_styles/main.scss";
 
 .LandingPage {
-	border: 1px solid coral;
+	grid-row: 2 / 3;
+	display: grid;
+	grid-template-rows: 3fr 1fr;
 	background-color: $primary-dark;
 }

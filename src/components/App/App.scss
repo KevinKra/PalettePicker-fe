@@ -1,6 +1,7 @@
 .App {
-  position: relative;
-  min-height: 100vh;
-  max-width: 100vw;
-  font-family: "Comfortaa", cursive;
+	display: grid;
+	grid-template-rows: 3.2rem 1fr;
+	min-height: 100vh;
+	max-width: 100vw;
+	font-family: "Comfortaa", cursive;
 }

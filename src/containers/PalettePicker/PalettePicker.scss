@@ -1,13 +1,13 @@
 @import "../../_styles/main.scss";
 
 .PalettePicker {
+	grid-row: 1 / 2;
 	display: flex;
 	flex-direction: column;
 	position: relative;
-	height: 70vh;
 	overflow: hidden;
 	z-index: 2;
-	border-bottom: 10px solid coral;
+	border-bottom: 10px solid $primary-color;
 	box-shadow: -1px 10px 12px 5px rgba(0, 0, 0, 0.75);
 	.colors-section {
 		display: flex;
