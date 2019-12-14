@@ -5,10 +5,10 @@
 	z-index: 2;
 	width: 100%;
 	padding-top: 12px;
-	background-color: white;
-	transform: translateY(-112%);
+	background-color: $primary-light;
+	transform: translateY(-30vh);
 	transition: 0.5s cubic-bezier(0.42, 0.63, 0.46, 1.15);
-	border-bottom: 6px solid coral;
+	border-bottom: 6px solid $primary-color;
 	box-shadow: -1px -7px 15px 9px rgba(0, 0, 0, 0.75);
 	h4 {
 		margin: 0;

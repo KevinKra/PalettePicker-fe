@@ -3,7 +3,7 @@ import './EditBarFull.scss';
 
 export default function EditBarFull(props) {
 	const editBarActive = {
-		transform: 'translateY(-9%)'
+		transform: 'translateY(-1vh)'
 	};
 
 	const generateRadios = (format) => {
