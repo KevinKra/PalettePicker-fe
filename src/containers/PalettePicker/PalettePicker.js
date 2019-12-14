@@ -7,7 +7,7 @@ import * as helpers from '../../_utilities/helpers';
 import { withRouter } from 'react-router-dom';
 import * as actions from '../../_redux/actions';
 import { connect } from 'react-redux';
-import './PalettePicker.css';
+import './PalettePicker.scss';
 
 export class PalettePicker extends Component {
 	state = {
