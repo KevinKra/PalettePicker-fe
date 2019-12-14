@@ -1,167 +1,148 @@
-import React, { Component } from "react";
-import ColorScheme from "color-scheme";
-import ColorBar from "../../components/ColorBar/ColorBar";
-import EditBarFull from "../../components/EditBarFull/EditBarFull";
-import EditBarPartial from "../../components/EditBarPartial/EditBarPartial";
-import { withRouter } from "react-router-dom";
-import * as actions from "../../_redux/actions";
-import { connect } from "react-redux";
-import "./PalettePicker.css";
+import React, { Component } from 'react';
+import ColorScheme from 'color-scheme';
+import ColorBar from '../../components/ColorBar/ColorBar';
+import EditBarFull from '../../components/EditBarFull/EditBarFull';
+import EditBarPartial from '../../components/EditBarPartial/EditBarPartial';
+import * as helpers from '../../_utilities/helpers';
+import { withRouter } from 'react-router-dom';
+import * as actions from '../../_redux/actions';
+import { connect } from 'react-redux';
+import './PalettePicker.css';
 
 export class PalettePicker extends Component {
-  state = {
-    hue: "",
-    hueLocked: false,
-    colorScheme: "triade",
-    variation: "pastel",
-    colors: [],
-    editable: false
-  };
+	state = {
+		hue: '',
+		hueLocked: false,
+		colorScheme: 'mono',
+		variation: 'light',
+		colors: [],
+		showFullEditBar: false
+	};
 
-  componentDidMount() {
-    this.generateColors();
-  }
+	componentDidMount() {
+		this.generateColors();
+	}
 
-  componentDidUpdate() {
-    this.props.updateCurrentPalette(this.state.colors);
-  }
+	componentDidUpdate() {
+		this.props.updateCurrentPalette(this.state.colors);
+	}
 
-  saveDialogOpen = () => {
-    this.props.history.push("save-palette");
-  };
+	saveDialogOpen = () => {
+		this.props.history.push('save-palette');
+	};
 
-  toggleEditable = () => {
-    const toggle = this.state.editable;
-    this.setState({ editable: !toggle });
-  };
+	toggleHueLock = () => {
+		const { hueLocked } = this.state;
+		this.setState({ hueLocked: !hueLocked });
+	};
 
-  updateHue = e => {
-    const { value } = e.target;
-    this.setState({ hue: value });
-  };
+	toggleFullEditBar = () => {
+		const { showFullEditBar } = this.state;
+		this.setState({ showFullEditBar: !showFullEditBar });
+	};
 
-  hueLock = () => {
-    this.setState({ hueLocked: true });
-  };
+	updatePaletteFeature = (e, feature) => {
+		const { value } = e.target;
+		this.setState({ [feature]: value });
+	};
 
-  hueUnlock = () => {
-    this.setState({ hueLocked: false });
-  };
+	updateHue = (e) => {
+		const { value } = e.target;
+		this.setState({ hue: value });
+	};
 
-  updateColorScheme = e => {
-    const { value } = e.target;
-    this.setState({ colorScheme: value });
-  };
+	updateColors = (e, previousColors) => {
+		e.preventDefault();
+		this.generateColors(previousColors);
+	};
 
-  updateVariation = e => {
-    const { value } = e.target;
-    this.setState({ variation: value });
-  };
+	handleLockStatus = (targetColor, lockStatus) => {
+		const colorIndex = this.state.colors.findIndex((color) => {
+			return targetColor === color;
+		});
+		const colors = this.state.colors.slice();
+		colors[colorIndex].locked = lockStatus;
+		this.setState({ colors });
+	};
 
-  updateColors = (e, previousColors) => {
-    e.preventDefault();
-    this.generateColors(previousColors);
-  };
+	buildPalettes = (colors) =>
+		colors.map((color) => {
+			return { hex: '#' + color, locked: false };
+		});
 
-  generateRandomHue = () => {
-    return Math.floor(Math.random() * (360 + 1));
-  };
+	renderPalettes = (previousPalettes, newPalettes, currentPalettes, hueToUse) => {
+		if (previousPalettes.length !== newPalettes.length) {
+			this.setState({ colors: newPalettes, hue: hueToUse });
+		} else {
+			// iterate through currentPalettes, if one is locked, splice newPalettes[i] and inject current.
+			// output will now consist of newPalette selection composed with previously locked palettes.
+			currentPalettes.forEach((palette, i) => {
+				if (palette.locked === true) newPalettes.splice(i, 1, palette);
+			});
+			this.setState({ colors: newPalettes, hue: hueToUse });
+		}
+	};
 
-  handleLockStatus = (targetColor, lockStatus) => {
-    const colorIndex = this.state.colors.findIndex(color => {
-      return targetColor === color;
-    });
-    const colors = this.state.colors.slice();
-    colors[colorIndex].locked = lockStatus;
-    this.setState({ colors });
-  };
+	generateColors = async (previousColors = []) => {
+		const { hue, hueLocked, colorScheme, variation, colors } = this.state;
+		const { pColorScheme = 'mono' } = this.props;
+		const hueToUse = !hueLocked ? helpers.generateRandomHue() : hue;
+		const schemeToUse = colorScheme ? colorScheme : pColorScheme;
+		const scheme = new ColorScheme();
+		scheme.from_hue(hueToUse).scheme(schemeToUse).variation(variation);
+		const palettes = this.buildPalettes(scheme.colors());
+		this.renderPalettes(previousColors, palettes, colors, hueToUse);
+	};
 
-  generateColors = async (previousColors = []) => {
-    const { hue, hueLocked, colorScheme, variation, colors } = this.state;
-    const { pColorScheme = "triade" } = this.props;
-    let generatedHue;
-    if (!hueLocked) {
-      generatedHue = this.generateRandomHue();
-    }
-    const scheme = new ColorScheme();
-    scheme
-      .from_hue(generatedHue || hue)
-      .scheme(colorScheme || pColorScheme)
-      .variation(variation);
-    const generatedColors = scheme.colors().map(color => {
-      return { hex: "#" + color, locked: false };
-    });
-    if (previousColors.length !== generatedColors.length) {
-      this.setState({ colors: generatedColors, hue: generatedHue || hue });
-    } else {
-      colors.forEach((color, i) => {
-        if (color.locked === true) generatedColors.splice(i, 1, color);
-      });
-      this.setState({ colors: generatedColors, hue: generatedHue || hue });
-    }
-  };
+	render() {
+		const { hueLocked, showFullEditBar, hue, colorScheme, variation, colors, vRotate } = this.state;
 
-  render() {
-    const colors = this.state.colors.map((color, i) => {
-      return (
-        <ColorBar
-          color={color}
-          vRotate={this.props.vRotate}
-          number={i}
-          handleLockStatus={this.handleLockStatus}
-          key={i}
-        />
-      );
-    });
+		const palettes = colors.map((color, i) => {
+			return (
+				<ColorBar color={color} vRotate={vRotate} number={i} handleLockStatus={this.handleLockStatus} key={i} />
+			);
+		});
 
-    return (
-      <section className="PalettePicker">
-        <EditBarPartial
-          editable={this.state.editable}
-          hue={this.state.hue}
-          hueLocked={this.state.hueLocked}
-          colorScheme={this.state.colorScheme}
-          variation={this.state.variation}
-          colors={this.state.colors}
-          updateColors={this.updateColors}
-          hueLock={this.hueLock}
-          hueUnlock={this.hueUnlock}
-        />
-        <EditBarFull
-          editable={this.state.editable}
-          hue={this.state.hue}
-          hueLocked={this.state.hueLocked}
-          colors={this.state.colors}
-          updateColors={this.updateColors}
-          updateHue={this.updateHue}
-          hueLock={this.hueLock}
-          hueUnlock={this.hueUnlock}
-          updateVariation={this.updateVariation}
-          updateColorScheme={this.updateColorScheme}
-        />
-        <div className="colors-section">{colors}</div>
-        <div className="button-bar">
-          <button className="primary-btn" onClick={this.toggleEditable}>
-            Edit
-          </button>
-          <button className="primary-btn" onClick={this.saveDialogOpen}>
-            Save
-          </button>
-        </div>
-      </section>
-    );
-  }
+		return (
+			<section className="PalettePicker">
+				<EditBarPartial
+					toggleHueLock={this.toggleHueLock}
+					updateColors={this.updateColors}
+					hueLocked={hueLocked}
+					showFullEditBar={showFullEditBar}
+					hue={hue}
+					colorScheme={colorScheme}
+					variation={variation}
+					colors={colors}
+				/>
+				<EditBarFull
+					toggleHueLock={this.toggleHueLock}
+					updatePaletteFeature={this.updatePaletteFeature}
+					updateColors={this.updateColors}
+					updateHue={this.updateHue}
+					showFullEditBar={showFullEditBar}
+					hue={hue}
+					hueLocked={hueLocked}
+					colors={colors}
+				/>
+				<div className="colors-section">{palettes}</div>
+				<div className="button-bar">
+					<button className="primary-btn" onClick={this.toggleFullEditBar}>
+						Edit
+					</button>
+					<button className="primary-btn" onClick={this.saveDialogOpen}>
+						Save
+					</button>
+				</div>
+			</section>
+		);
+	}
 }
 
-const mapDispatchToProps = dispatch => ({
-  createNewProject: project => dispatch(actions.createNewProject(project)),
-  updateExistingProject: project =>
-    dispatch(actions.updateExistingProject(project)),
-  updateCurrentPalette: palette =>
-    dispatch(actions.updateCurrentPalette(palette))
+const mapDispatchToProps = (dispatch) => ({
+	createNewProject: (project) => dispatch(actions.createNewProject(project)),
+	updateExistingProject: (project) => dispatch(actions.updateExistingProject(project)),
+	updateCurrentPalette: (palette) => dispatch(actions.updateCurrentPalette(palette))
 });
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(withRouter(PalettePicker));
+export default connect(null, mapDispatchToProps)(withRouter(PalettePicker));
