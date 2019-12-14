@@ -1,0 +1,20 @@
+@mixin btn-style-1 {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: $color-accent;
+	color: $color-primary;
+	border-radius: 5px;
+	border: 1px solid $color-accent-dark;
+	transition: 0.03s all ease-in-out;
+	font-size: 12px;
+	font-family: "Comfortaa", cursive;
+	font-weight: 800;
+	text-transform: uppercase;
+	&:active {
+		background-color: $color-accent-dark;
+	}
+	&:hover {
+		cursor: pointer;
+	}
+}
