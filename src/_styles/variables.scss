@@ -6,10 +6,10 @@ $font-2: "Comfortaa", cursive;
 $font-3: "Carter One", cursive;
 
 @mixin input-focus {
-  border: 1px solid lightgrey;
-  transition: 0.17s border ease;
-  &:focus {
-    outline: none;
-    border: 1px solid $primary-dark;
-  }
+	border: 1px solid lightgrey;
+	transition: 0.17s border ease;
+	&:focus {
+		outline: none;
+		border: 1px solid $primary-dark;
+	}
 }
