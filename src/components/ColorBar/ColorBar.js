@@ -3,15 +3,17 @@ import './ColorBar.scss';
 
 export default class ColorBar extends Component {
 	render() {
+		const { togglePaletteLock, color, number, vRotate } = this.props;
+
 		const colorBarStyle = {
-			backgroundColor: `${this.props.color.hex}`
+			backgroundColor: `${color.hex}`
 		};
 		const defaultStyle = {
 			transform: 'translateY(-150%)',
-			animation: `move 0.7s ease-in ${this.props.number / 8}s forwards`
+			animation: `move 0.7s ease-in ${number / 8}s forwards`
 		};
 		const lockedBarStyle = {
-			backgroundColor: `${this.props.color.hex}`,
+			backgroundColor: `${color.hex}`,
 			borderBottom: '5px solid black'
 		};
 		const lockedStyle = {
@@ -20,33 +22,18 @@ export default class ColorBar extends Component {
 			opacity: 1
 		};
 		return (
-			<div className="color-block" style={defaultStyle}>
-				<div
-					className={`color-bar color-${this.props.number + 1}`}
-					style={this.props.color.locked ? lockedBarStyle : colorBarStyle}
-				>
-					<p className={this.props.vRotate && 'color-bar-text-vertical'}>
-						{this.props.color.hex.toUpperCase()}
-					</p>
+			<section
+				className="color-block"
+				style={defaultStyle}
+				onClick={color.locked ? () => togglePaletteLock(color, false) : () => togglePaletteLock(color, true)}
+			>
+				<div className={`color-bar color-${number + 1}`} style={color.locked ? lockedBarStyle : colorBarStyle}>
+					<p className={vRotate && 'color-bar-text-vertical'}>{color.hex.toUpperCase()}</p>
 				</div>
-				<button
-					className="lock-button"
-					onClick={
-						this.props.color.locked ? (
-							() => this.props.togglePaletteLock(this.props.color, false)
-						) : (
-							() => this.props.togglePaletteLock(this.props.color, true)
-						)
-					}
-					style={this.props.color.locked ? lockedStyle : null}
-				>
-					{this.props.color.locked ? (
-						<i className="fas fa-2x fa-lock" />
-					) : (
-						<i className="fas fa-2x fa-unlock-alt" />
-					)}
+				<button className="lock-button" style={color.locked ? lockedStyle : null}>
+					{color.locked ? <i className="fas fa-2x fa-lock" /> : <i className="fas fa-2x fa-unlock-alt" />}
 				</button>
-			</div>
+			</section>
 		);
 	}
 }
