@@ -121,6 +121,7 @@ export class PalettePicker extends Component {
 					updateColors={this.updateColors}
 					updateHue={this.updateHue}
 					showFullEditBar={showFullEditBar}
+					colorScheme={colorScheme}
 					hue={hue}
 					hueLocked={hueLocked}
 					colors={colors}

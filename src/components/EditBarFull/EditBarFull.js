@@ -5,6 +5,27 @@ export default function EditBarFull(props) {
 	const editBarActive = {
 		transform: 'translateY(-9%)'
 	};
+
+	const generateSchemes = () => {
+		const schemeNames = [ 'mono', 'contrast', 'triade', 'tetrade', 'analogic' ];
+		return schemeNames.map((name) => {
+			return (
+				<label htmlFor={name}>
+					{name}
+					<input
+						type="radio"
+						name="colorScheme-selection"
+						value={name}
+						defaultChecked={props.colorScheme === name ? true : false}
+						onClick={(e) => props.updatePaletteFeature(e, 'colorScheme')}
+					/>
+				</label>
+			);
+		});
+	};
+
+	const colorSchemes = generateSchemes();
+
 	return (
 		<section className="edit-block" style={props.showFullEditBar ? editBarActive : null}>
 			<form className="edits-form" onSubmit={(e) => props.updateColors(e, props.colors)}>
@@ -30,12 +51,14 @@ export default function EditBarFull(props) {
 				</div>
 				<section className="radio-styles">
 					<h4>Color schemes:</h4>
-					<label htmlFor="mono">
+					{colorSchemes}
+					{/* <label htmlFor="mono">
 						mono
 						<input
 							type="radio"
 							name="colorScheme-selection"
 							value="mono"
+							defaultChecked
 							onClick={(e) => props.updatePaletteFeature(e, 'colorScheme')}
 						/>
 					</label>
@@ -54,7 +77,6 @@ export default function EditBarFull(props) {
 							type="radio"
 							name="colorScheme-selection"
 							value="triade"
-							defaultChecked
 							onClick={(e) => props.updatePaletteFeature(e, 'colorScheme')}
 						/>
 					</label>
@@ -75,7 +97,7 @@ export default function EditBarFull(props) {
 							value="analogic"
 							onClick={(e) => props.updatePaletteFeature(e, 'colorScheme')}
 						/>
-					</label>
+					</label> */}
 				</section>
 				<section className="radio-styles">
 					<h4>Color Variations:</h4>
