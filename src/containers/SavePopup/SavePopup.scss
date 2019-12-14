@@ -1,72 +1,169 @@
+@import "../../styles/main.scss";
+
+.SavePopup-container {
+	position: fixed;
+	margin-left: auto;
+	margin-right: auto;
+	top: 19%;
+	left: 15%;
+	right: 15%;
+	z-index: 4;
+	width: 400px;
+}
+
+.save-section {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	position: absolute;
+	z-index: 1;
+	bottom: 0;
+	left: 0;
+	border: 1px solid $color-accent;
+	border-bottom: 5px solid $color-accent;
+	width: 100%;
+	height: 190px;
+	transition: 0.8s all cubic-bezier(0.13, 1.28, 0.5, 1.14);
+	background-color: $color-accent;
+	.submit-btn {
+		background-color: $color-accent;
+		color: $color-accent;
+		padding: 0.7rem;
+		margin-bottom: 0.3rem;
+		border: 1px solid $color-accent;
+		font-size: 14px;
+		width: 98%;
+	}
+	.query-inputs > section {
+		display: flex;
+		flex-direction: column;
+		padding: 0.5rem;
+	}
+
+	.query-param > input {
+		margin: 0.2rem 0;
+	}
+
+	.query-title-container {
+		position: relative;
+		margin-left: auto;
+		margin-right: auto;
+		top: -20px;
+		left: 0;
+		right: 0;
+		background-color: $color-accent;
+		border: 2px solid white;
+		color: $color-primary;
+		padding: 0.5rem;
+		transform: skew(5deg);
+	}
+
+	.queries-section {
+		border: 1px dashed $color-primary;
+		overflow: scroll;
+		height: 70px;
+		width: 360px;
+	}
+
+	.query-radio {
+		background-color: $color-primary;
+		color: $color-primary;
+		margin: 0.1rem 0;
+		padding: 0.1rem;
+	}
+
+	.query-radio > label {
+		padding-left: 0.5rem;
+	}
+
+	h3 {
+		margin: 0;
+		margin-bottom: 0.2rem;
+	}
+}
+
 .SavePopup {
-  position: fixed;
-  margin-left: auto;
-  margin-right: auto;
-  top: 25%;
-  left: 15%;
-  right: 15%;
-  z-index: 4;
-  max-width: 400px;
-  border: 1px solid coral;
-  color: red;
+	position: relative;
+	z-index: 2;
+	width: 100%;
+	border: 1px solid $color-primary;
+	border-bottom: 5px solid $color-primary;
+	background-color: $color-primary;
+	transition: 0.7s height ease-in-out;
 
-  .palettes-section {
-    border: 1px solid red;
-    height: 300px;
-    width: 80%;
-    overflow: scroll;
-  }
-  .palette-details {
-    display: flex;
-    justify-content: space-between;
-    margin: 0.2rem 0.4rem;
-    border: 1px solid blue;
-  }
-  .palette-inputs {
-    display: flex;
-  }
-  .palette-color {
-    height: 1.5rem;
-    min-width: 5rem;
-    margin-right: 0.5rem;
-    border: 1px solid black;
-  }
-  .editor-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: white;
-  }
+	.title-background {
+		position: absolute;
+		top: -45px;
+		left: -15px;
+		transform: skew(15deg);
+		padding: 0.7rem;
+		background-color: $color-primary;
+	}
 
-  .editor-title {
-    margin: 0;
-  }
+	.editor-title {
+		transform: skew(-15deg);
+		color: $color-primary;
+	}
 
-  .editor-exit {
-    position: absolute;
-    right: -10px;
-    top: -10px;
-  }
+	.exit-background {
+		position: absolute;
+		right: -15px;
+		top: -15px;
+		padding: 0.4rem;
+		padding-top: 0.7rem;
+		transform: skew(-12deg);
+		background-color: $color-primary;
+	}
 
-  .submit-btn {
-    border: 1px solid red;
-    background-color: coral;
-    color: white;
-    font-size: 16px;
-    border-radius: 5px;
-    width: 70%;
-    padding: 0.5rem;
-    margin: 0.5rem;
-  }
+	.save-exit {
+		background-color: $color-primary;
+		color: $color-primary;
+		border: 1px solid $color-primary;
+		transform: skew(-4deg);
+		font-size: 15px;
+		padding: 0.3rem 0.5rem;
+	}
 
-  .remove-btn {
-  }
+	.palette-form {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		padding: 0.6rem 0.5rem;
+	}
 
-  .screen {
-    position: absolute;
-    z-index: 3;
-    background-color: rgba(6, 16, 20, 0.658);
-    height: 100%;
-    width: 100vw;
-  }
+	.palette-form > header {
+		display: flex;
+		align-items: center;
+		padding: 1rem;
+	}
+
+	.palette-form > header > label {
+		font-size: 16px;
+		text-decoration: underline;
+	}
+
+	.palette-form > header > input {
+		font-size: 14px;
+		padding: 0.1rem;
+		margin-left: 0.3rem;
+	}
+
+	.palettes-section {
+		background-color: $color-primary;
+		border: 1px dashed $color-primary;
+		width: 90%;
+		height: 20vh;
+		overflow: scroll;
+	}
+
+	button {
+		border: 1px solid $color-primary;
+		background-color: $color-primary;
+		color: $color-primary;
+		padding: 0.7rem;
+		margin: 0.2rem 0;
+		font-size: 14px;
+		width: 100%;
+	}
 }
